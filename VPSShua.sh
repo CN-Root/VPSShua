@@ -7,7 +7,7 @@
 # 2. 支持国内/海外资源选择
 # 3. 可设置流量限制和线程数
 # 4. 实时统计显示
-# 5. 新增设置菜单
+# 5. 取消设置面板和开机自启功能
 # ==============================================
 
 # 定义颜色代码
@@ -105,7 +105,7 @@ download_task() {
 show_menu() {
     clear
     echo "======================================"
-    echo "            VPSShua - V1.0            "
+    echo "         VPSShua|VPS刷下行流量         "
     echo "======================================"
     echo "当前设置:"
     echo "  - 资源类型: $([ -z "$RESOURCE_TYPE" ] && echo "未选择" || echo "$RESOURCE_TYPE")"
@@ -116,12 +116,12 @@ show_menu() {
     echo "2. 设置流量限制"
     echo "3. 设置线程数"
     echo "4. 开始运行"
-    echo "5. 设置"
-    echo "6. 退出"
+    echo "5. 退出"
+    echo "6. 更新 VPSShua"
     echo "======================================"
     echo -e "${RED}VPSShua提醒您："
-	echo -e "本脚本仅限交流学习使用|请勿违反使用者当地法律法规的用途"
-	echo -e "否则后果自负|我们将不承担任何法律责任${RESET}"
+    echo -e "本脚本仅限交流学习使用|请勿违反使用者当地法律法规的用途"
+    echo -e "否则后果自负|我们将不承担任何法律责任${RESET}"
     echo "======================================"
 }
 
@@ -157,60 +157,11 @@ select_region() {
     echo "已选择 ${#SELECTED_URLS[@]} 个资源"
 }
 
-# 设置菜单
-settings_menu() {
-    while true; do
-        clear
-        echo "======================================"
-        echo "          设置菜单 - VPSShua          "
-        echo "======================================"
-        echo "1. 安装 VPSShua"
-        echo "2. 更新 VPSShua"
-        echo "3. 设置开机自启"
-        echo "4. 取消开机自启"
-        echo "5. 返回主菜单"
-        echo "======================================"
-        read -p "请输入选项(1-5): " setting_option
-        
-        case $setting_option in
-            1) install_vpsshua ;;
-            2) update_vpsshua ;;
-            3) enable_autostart ;;
-            4) disable_autostart ;;
-            5) break ;;
-            *) echo "无效选项，请重新输入" ;;
-        esac
-        
-        read -p "按回车继续..."
-    done
-}
-
-# 安装 VPSShua
-install_vpsshua() {
-    echo "正在安装 VPSShua..."
-    # 这里可以添加安装脚本的逻辑
-    echo "安装完成！"
-}
-
 # 更新 VPSShua
 update_vpsshua() {
     echo "正在更新 VPSShua..."
-    # 这里可以添加更新脚本的逻辑
+    # 这里添加你的更新逻辑，比如 git pull 或下载最新脚本
     echo "更新完成！"
-}
-
-# 设置开机自启
-enable_autostart() {
-    echo "正在设置开机自启..."
-    # 这里可以添加设置开机自启的逻辑
-    echo "设置完成！"
-}
-
-# 取消开机自启
-disable_autostart() {
-    echo "正在取消开机自启..."
-    # 这里可以添加取消开机自启的逻辑
-    echo "取消完成！"
 }
 
 # 主控制函数
@@ -226,8 +177,8 @@ main() {
             2) read -p "输入要消耗的流量(GB): " LIMIT_GB ;;
             3) read -p "输入线程数量: " THREADS ;;
             4) start_download ;;
-            5) settings_menu ;;
-            6) cleanup ;;
+            5) cleanup ;;  # 退出
+            6) update_vpsshua ;;
             *) echo "无效选项，请重新输入" ;;
         esac
     done
@@ -235,7 +186,7 @@ main() {
 
 # 开始下载
 start_download() {
-    [ -z "$SELECTED_URLS" ] && { echo "请先选择资源！"; return; }
+    [ ${#SELECTED_URLS[@]} -eq 0 ] && { echo "请先选择资源！"; return; }
     
     rm -f "$STAT_FILE" "$STOP_FILE"
     TOTAL_BYTES=0
