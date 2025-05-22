@@ -10,6 +10,9 @@
 # 5. 取消设置面板和开机自启功能
 # ==============================================
 
+#声明版本号
+VERSION="v0.1"
+
 # 定义颜色代码
 RED="\033[31m"
 GREEN="\033[32m"
@@ -159,9 +162,34 @@ select_region() {
 
 # 更新 VPSShua
 update_vpsshua() {
-    echo "正在更新 VPSShua..."
-    # 这里添加你的更新逻辑，比如 git pull 或下载最新脚本
-    echo "更新完成！"
+    echo "正在检查更新..."
+
+    local latest_tag
+    latest_tag=$(curl -s https://api.github.com/repos/CN-Root/VPSShua/releases/latest | grep '"tag_name":' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+
+    if [ -z "$latest_tag" ]; then
+        echo "无法获取最新版本信息，检查网络或API访问权限"
+        return
+    fi
+
+    echo "当前版本: $VERSION"
+    echo "最新版本: $latest_tag"
+
+    if [ "$latest_tag" != "$VERSION" ]; then
+        echo "检测到新版本 $latest_tag，开始更新..."
+
+        # 这里假设脚本主文件名是 vpsshua.sh，并且放在仓库根目录
+        curl -L -o "$0" "https://github.com/CN-Root/VPSShua/releases/download/$latest_tag/vpsshua.sh"
+
+        if [ $? -eq 0 ]; then
+            echo "更新成功！请重新运行脚本。"
+            exit 0
+        else
+            echo "更新失败，请检查网络或手动更新。"
+        fi
+    else
+        echo "当前已是最新版本，无需更新。"
+    fi
 }
 
 # 主控制函数
