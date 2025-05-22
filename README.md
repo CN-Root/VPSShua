@@ -1,9 +1,9 @@
 # 🌀 VPSShua|刷VPS下行流量|VPS traffic disappears
 
 简介：
-VPSShua 是一款用于刷 VPS 下行流量的工具，具备高度稳定性、可配置性强、交互式菜单操作等特性。适合需要模拟下行带宽占用、测试网络性能、或学习流量相关操作的用户使用。
+VPSShua 是一款用于刷 VPS 下行流量的工具，具备高度稳定性、可配置性强、交互式菜单操作等特性。适合需要模拟下行带宽占用、测试网络性能、或学习流量相关操作的用户使用。<br/><br/>
 一键安装：
-<pre lang="markdown">```bash bash &lt;(curl -Ls https://raw.githubusercontent.com/XrayR-project/XrayR-release/master/install.sh) ``` </pre>
+<pre lang="markdown">bash bash &lt;(curl -Ls https://raw.githubusercontent.com/XrayR-project/XrayR-release/master/install.sh)</pre>
 <hr/>
 ✨ 核心功能：
 <ui>
