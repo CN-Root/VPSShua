@@ -39,5 +39,4 @@ VPSShua 是一款用于刷 VPS 下行流量的工具，具备高度稳定性、�
 📦 作者附赠：
 <ui>
 <li>感谢使用 VPSShua，脚本尾部含加密钱包地址，欢迎打赏支持！
-广告合作请联系作者：<a href="//t.me/baolihou" target="_blank">TG暴力猴</a></li>
 </ui>
