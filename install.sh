@@ -2,7 +2,7 @@
 
 INSTALL_DIR="/etc/VPSShua"
 BIN_PATH="/usr/local/bin/vpsshua"
-SCRIPT_URL="https://raw.githubusercontent.com/yourname/vpsshua/main/vpsshua.sh"  # ← 请替换为你的真实 URL
+SCRIPT_URL="https://raw.githubusercontent.com/CN-Root/VPSShua/refs/heads/main/VPSShua.sh"  # ← 请替换为你的真实 URL
 
 echo "📁 创建安装目录: $INSTALL_DIR"
 sudo mkdir -p "$INSTALL_DIR"
